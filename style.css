@@ -95,16 +95,15 @@ body {
 
 /* Year Button Container */
 .year-nav {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 15px;
-    flex-wrap: wrap;
     margin-top: 40px;
 }
 
 .btn-year {
-    display: inline-block;
-    padding: 12px 30px;
+    display: block;
+    padding: 12px 20px;
     background-color: var(--primary);
     color: white;
     text-decoration: none;
@@ -112,7 +111,10 @@ body {
     font-weight: bold;
     transition: 0.3s ease;
     border: 2px solid var(--primary);
+    text-align: center;
+    min-width: 120px;
 }
+
 
 .btn-year:hover {
     background-color: transparent;
@@ -210,15 +212,16 @@ body {
     }
 
     .members-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
 
     .year-nav {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         gap: 10px;
     }
 
     .btn-year {
-        width: 100%;
+        min-width: 120px;
         text-align: center;
         padding: 10px 16px;
     }
