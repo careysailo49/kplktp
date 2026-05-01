@@ -24,8 +24,13 @@
         <h2 class="section-title">Sub Committee Hrang Hrang Te</h2>
 
         <section class="group-section">
-            <h2 class="group-title">Programme Sub Committee</h2>            
-            <div class="committee-list">
+            <h2 class="group-title">Programme Sub Committee</h2>
+            <div class="committee-summary" role="button" tabindex="0" aria-label="Open Programme Sub Committee details">
+                <p><strong>Chairman:</strong> Pu Lalthanzama</p>
+                <p><strong>Secretary:</strong> Nl Jacobeth Lalhriatpuii</p>
+                <p class="modal-note">Click here to open full committee details.</p>
+            </div>
+            <div class="committee-list hidden">
                 <h3>Chairman    : Pu Lalthanzama </h3>
                 <h3>Secreatary  : Nl Jacobeth Lalhriatpuii </h3>
                 <h4>Members Te  : 1. Pu Lalmalsawma (Tea) &nbsp;&nbsp;&nbsp; 2. Tv Albert Zarzotluanga &nbsp;&nbsp;&nbsp; 3. Tv Jeho Lalzarnghaka</h4>
@@ -33,8 +38,13 @@
         </section>
         
         <section class="group-section">
-            <h2 class="group-title">Decoration & Ushering Sub Committee</h2>            
-            <div class="committee-list">
+            <h2 class="group-title">Decoration & Ushering Sub Committee</h2>
+            <div class="committee-summary" role="button" tabindex="0" aria-label="Open Decoration & Ushering Sub Committee details">
+                <p><strong>Chairman:</strong> Pu Jimmy Lalnuntluanga</p>
+                <p><strong>Secretary:</strong> Nl R Lalruatkimi</p>
+                <p class="modal-note">Click here to open full committee details.</p>
+            </div>
+            <div class="committee-list hidden">
                 <h3>Chairman    : Pu Jimmy Lalnuntluanga </h3>
                 <h3>Secreatary  : Nl R Lalruatkimi </h3>
                 <h4>Members Te</h4>
@@ -44,8 +54,13 @@
         </section>
 
         <section class="group-section">
-            <h2 class="group-title">Information, Media & Documentation Sub Committee</h2>            
-            <div class="committee-list">
+            <h2 class="group-title">Information, Media & Documentation Sub Committee</h2>
+            <div class="committee-summary" role="button" tabindex="0" aria-label="Open Information, Media & Documentation Sub Committee details">
+                <p><strong>Chairman:</strong> Pu Jimmy Lalnuntluanga</p>
+                <p><strong>Secretary:</strong> Nl R Lalruatkimi</p>
+                <p class="modal-note">Click here to open full committee details.</p>
+            </div>
+            <div class="committee-list hidden">
                 <h3>Chairman    : Pu Jimmy Lalnuntluanga </h3>
                 <h3>Secreatary  : Nl R Lalruatkimi </h3>
                 <h4>Members Te</h4>
@@ -55,8 +70,13 @@
         </section>
 
         <section class="group-section">
-            <h2 class="group-title">Evangelical Sub Committee</h2>            
-            <div class="committee-list">
+            <h2 class="group-title">Evangelical Sub Committee</h2>
+            <div class="committee-summary" role="button" tabindex="0" aria-label="Open Evangelical Sub Committee details">
+                <p><strong>Chairman:</strong> Pu Jimmy Lalnuntluanga</p>
+                <p><strong>Secretary:</strong> Nl R Lalruatkimi</p>
+                <p class="modal-note">Click here to open full committee details.</p>
+            </div>
+            <div class="committee-list hidden">
                 <h3>Chairman    : Pu Jimmy Lalnuntluanga </h3>
                 <h3>Secreatary  : Nl R Lalruatkimi </h3>
                 <h4>Members Te</h4>
@@ -149,6 +169,77 @@
             
             requestAnimationFrame(scrollStep);
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const summaries = document.querySelectorAll('.committee-summary');
+            if (!summaries.length) return;
+
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
+            modalOverlay.id = 'committee-modal';
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            modalOverlay.innerHTML = `
+                <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="committee-modal-title">
+                    <button type="button" class="modal-close" aria-label="Close">×</button>
+                    <h2 id="committee-modal-title" class="modal-title"></h2>
+                    <div class="modal-body"></div>
+                </div>
+            `;
+            document.body.appendChild(modalOverlay);
+
+            const modalTitle = modalOverlay.querySelector('.modal-title');
+            const modalBody = modalOverlay.querySelector('.modal-body');
+            const closeButton = modalOverlay.querySelector('.modal-close');
+
+            function openModal(titleText, listContent) {
+                modalTitle.textContent = titleText;
+                modalBody.innerHTML = listContent;
+                modalOverlay.classList.add('active');
+                modalOverlay.setAttribute('aria-hidden', 'false');
+                closeButton.focus();
+            }
+
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                modalOverlay.setAttribute('aria-hidden', 'true');
+                modalBody.innerHTML = '';
+            }
+
+            summaries.forEach(function (summary) {
+                const section = summary.closest('.group-section');
+                if (!section) return;
+
+                const title = section.querySelector('.group-title');
+                const list = section.querySelector('.committee-list');
+                if (!title || !list) return;
+
+                summary.addEventListener('click', function () {
+                    openModal(title.textContent.trim(), list.innerHTML);
+                });
+
+                summary.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openModal(title.textContent.trim(), list.innerHTML);
+                    }
+                });
+            });
+
+            closeButton.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', function (event) {
+                if (event.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
     </script>
 
 </body>
