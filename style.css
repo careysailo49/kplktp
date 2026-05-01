@@ -8,6 +8,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+img, video, svg {
+    max-width: 100%;
+    height: auto;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg);
@@ -137,4 +142,98 @@ body {
     background: #f1f5f9;
     border-radius: 8px;
     border-left: 5px solid var(--accent);
+}
+
+@media (max-width: 900px) {
+    .main-header {
+        padding: 50px 15px;
+    }
+
+    .main-header h1 {
+        font-size: 2rem;
+    }
+
+    .logo-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+        padding-bottom: 8px;
+    }
+
+    .group-section {
+        padding: 24px;
+    }
+
+    .members-grid {
+        gap: 18px;
+    }
+
+    .member-card img {
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+    }
+
+    .btn-year {
+        padding: 12px 24px;
+    }
+
+    .committee-list h3,
+    .committee-list h4 {
+        font-size: 0.98rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .main-header {
+        padding: 36px 12px;
+    }
+
+    .main-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .logo-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .year-nav {
+        gap: 10px;
+    }
+
+    .btn-year {
+        width: 100%;
+        text-align: center;
+        padding: 10px 16px;
+    }
+
+    .group-section {
+        padding: 20px;
+    }
+
+    .committee-list {
+        padding: 16px;
+    }
+
+    .committee-list h3,
+    .committee-list h4 {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
 }
